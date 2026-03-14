@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public Vector2 FacingDirection { get; private set; } = Vector2.down;
     public Vector2 AimDirection { get; private set; } = Vector2.down;
     private bool movementEnabled = true;
-    private bool isAiming = false;
     private float speedMultiplier = 1f;
 
     public void SetMovementEnabled(bool enabled)
@@ -22,11 +21,10 @@ public class PlayerController : MonoBehaviour
 
     public void SetAimingMode(bool aiming, float multiplier = 1f)
     {
-        isAiming = aiming;
         speedMultiplier = aiming ? multiplier : 1f;
-        if (aiming)
-            AimDirection = FacingDirection;
     }
+
+    public void SetAimDirection(Vector2 dir) { AimDirection = dir; }
 
     void Awake()
     {
@@ -39,63 +37,23 @@ public class PlayerController : MonoBehaviour
     {
         if (assignedGamepad == null) return;
 
-        if (isAiming)
-        {
-            var rightStick = assignedGamepad.rightStick.ReadValue();
-            if (rightStick.sqrMagnitude > 0.01f)
-                AimDirection = rightStick.normalized;
+        var rightStick = assignedGamepad.rightStick.ReadValue();
+        if (rightStick.sqrMagnitude > 0.01f)
+            AimDirection = rightStick.normalized;
 
-            moveInput = assignedGamepad.leftStick.ReadValue();
-            if (moveInput != Vector2.zero)
-            {
-                FacingDirection = moveInput.normalized;
-                animator.SetFloat("MoveX", moveInput.x);
-                animator.SetFloat("MoveY", moveInput.y);
-                animator.SetBool("isWalking", true);
-            }
-            else
-            {
-                animator.SetBool("isWalking", false);
-            }
-        }
-        else if (assignedGamepad.rightTrigger.isPressed)
+        moveInput = assignedGamepad.leftStick.ReadValue();
+        if (moveInput != Vector2.zero)
         {
-            var rightStick = assignedGamepad.rightStick.ReadValue();
-            if (rightStick.sqrMagnitude > 0.01f)
-                AimDirection = rightStick.normalized;
-
-            moveInput = assignedGamepad.leftStick.ReadValue();
-            if (moveInput != Vector2.zero)
-            {
-                FacingDirection = moveInput.normalized;
-                animator.SetFloat("MoveX", moveInput.x);
-                animator.SetFloat("MoveY", moveInput.y);
-                animator.SetBool("isWalking", true);
-            }
-            else
-            {
-                animator.SetBool("isWalking", false);
-            }
+            FacingDirection = moveInput.normalized;
+            if (rightStick.sqrMagnitude <= 0.01f)
+                AimDirection = FacingDirection;
+            animator.SetFloat("MoveX", moveInput.x);
+            animator.SetFloat("MoveY", moveInput.y);
+            animator.SetBool("isWalking", true);
         }
         else
         {
-            var leftStick = assignedGamepad.leftStick.ReadValue();
-            if (leftStick != moveInput)
-            {
-                moveInput = leftStick;
-                if (moveInput != Vector2.zero)
-                {
-                    FacingDirection = moveInput.normalized;
-                    AimDirection = FacingDirection;
-                    animator.SetFloat("MoveX", moveInput.x);
-                    animator.SetFloat("MoveY", moveInput.y);
-                    animator.SetBool("isWalking", true);
-                }
-                else
-                {
-                    animator.SetBool("isWalking", false);
-                }
-            }
+            animator.SetBool("isWalking", false);
         }
     }
 
