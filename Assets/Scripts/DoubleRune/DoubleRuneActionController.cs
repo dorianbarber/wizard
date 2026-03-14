@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public interface IDoubleRuneAction
 {
@@ -7,16 +8,29 @@ public interface IDoubleRuneAction
 
 public class DoubleRuneActionController : MonoBehaviour
 {
-    [SerializeField] private BoobyTrap boobyTrap;
-    [SerializeField] private LaserAttack laserAttack;
-    [SerializeField] private Shield shield;
-    [SerializeField] private SlowCircleAttack slowCircleAttack;
+    [SerializeField] private GameObject boobyTrapPrefab;
+    [SerializeField] private GameObject laserAttackPrefab;
+    [SerializeField] private GameObject shieldPrefab;
+    [SerializeField] private GameObject slowCircleAttackPrefab;
 
     private IDoubleRuneAction[] actions;
 
     void Awake()
     {
-        actions = new IDoubleRuneAction[] { boobyTrap, laserAttack, shield, slowCircleAttack };
+        actions = new IDoubleRuneAction[]
+        {
+            Instantiate(boobyTrapPrefab).GetComponent<BoobyTrap>(),
+            Instantiate(laserAttackPrefab).GetComponent<LaserAttack>(),
+            Instantiate(shieldPrefab).GetComponent<Shield>(),
+            Instantiate(slowCircleAttackPrefab).GetComponent<SlowCircleAttack>()
+        };
+    }
+
+    void Update()
+    {
+        var gamepad = Gamepad.current;
+        if (gamepad != null && gamepad.rightTrigger.wasPressedThisFrame)
+            TriggerRandomAction();
     }
 
     public void TriggerRandomAction()

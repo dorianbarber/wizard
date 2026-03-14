@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 2116456841554465800}
   - component: {fileID: 7343555917138568934}
   - component: {fileID: 83982262740022677}
+  - component: {fileID: 7354603914730587058}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -279,3 +280,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &7354603914730587058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7709700411546664291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec273fa483d01e4892e1e4f31d00b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoubleRuneActionController
+  boobyTrapPrefab: {fileID: 5738773923668391160, guid: 0a2f688461c53dc498a73f28a3c11c46, type: 3}
+  laserAttackPrefab: {fileID: 5340376400093979029, guid: 256493d56ee18c940a2a3465329fe871, type: 3}
+  shieldPrefab: {fileID: 3097849183801727455, guid: 2f5669964ea8a17468c915beb2c7bd6e, type: 3}
+  slowCircleAttackPrefab: {fileID: 3872258036158094865, guid: 63da76cc3d3b65a4184c0587395961ab, type: 3}
