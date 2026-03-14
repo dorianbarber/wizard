@@ -13,6 +13,18 @@ public class PickupController : MonoBehaviour
         uiRuneController.AddRune(runeType);
     }
 
+    public bool TryExpendOne(out RuneType rune)
+    {
+        if (runeQueue.Count < 1)
+        {
+            rune = default;
+            return false;
+        }
+        rune = runeQueue.Dequeue();
+        uiRuneController.RemoveRune();
+        return true;
+    }
+
     public void ExpendPair()
     {
         if (runeQueue.Count >= 1) runeQueue.Dequeue();
