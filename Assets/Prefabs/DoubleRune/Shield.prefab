@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 597937996407961443}
   - component: {fileID: 6672019312053795795}
+  - component: {fileID: 4274080915955358475}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -44,3 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a01c237409a7541adcc0d562612115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shield
+  radius: 0.5
+  segments: 64
+  lineWidth: 0.05
+  shieldColor: {r: 0.3, g: 0.6, b: 1, a: 0.35}
+--- !u!210 &4274080915955358475
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097849183801727455}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
