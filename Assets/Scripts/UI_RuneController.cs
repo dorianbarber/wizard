@@ -1,8 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class UI_RuneController : MonoBehaviour
 {
     [SerializeField] private UI_Rune runePrefab;
+
+    IEnumerator Start()
+    {
+        // Pre-warm: render for one frame so shaders compile before the first real pickup
+        UI_Rune warmup = Instantiate(runePrefab, transform);
+        warmup.gameObject.AddComponent<CanvasGroup>().alpha = 0f;
+        yield return null;
+        Destroy(warmup.gameObject);
+    }
 
     public void AddRune(RuneType runeType)
     {
