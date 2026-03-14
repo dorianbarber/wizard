@@ -19,11 +19,25 @@ public class DoubleRuneActionController : MonoBehaviour
     {
         actions = new IDoubleRuneAction[]
         {
-            Instantiate(boobyTrapPrefab).GetComponent<BoobyTrap>(),
-            Instantiate(laserAttackPrefab).GetComponent<LaserAttack>(),
-            Instantiate(shieldPrefab).GetComponent<Shield>(),
-            Instantiate(slowFieldPrefab).GetComponent<SlowField>()
+            InstantiateAction<BoobyTrap>(boobyTrapPrefab),
+            InstantiateAction<LaserAttack>(laserAttackPrefab),
+            InstantiateAction<Shield>(shieldPrefab),
+            InstantiateAction<SlowField>(slowFieldPrefab)
         };
+    }
+
+    private T InstantiateAction<T>(GameObject prefab) where T : MonoBehaviour, IDoubleRuneAction
+    {
+        if (prefab == null)
+        {
+            Debug.LogError($"[DoubleRuneActionController] Prefab for {typeof(T).Name} is not assigned in the inspector.");
+            return null;
+        }
+        var instance = Instantiate(prefab);
+        var component = instance.GetComponent<T>();
+        if (component == null)
+            Debug.LogError($"[DoubleRuneActionController] Prefab '{prefab.name}' is missing the {typeof(T).Name} component.");
+        return component;
     }
 
     void Update()
