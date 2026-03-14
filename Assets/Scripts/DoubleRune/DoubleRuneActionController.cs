@@ -55,7 +55,7 @@ public class DoubleRuneActionController : MonoBehaviour
 
     public void TriggerDown()
     {
-        int index = Random.Range(0, actions.Length);
+        int index = 1; //Random.Range(0, actions.Length);
         currentAction = actions[index];
         currentAction.TriggerDown();
     }
