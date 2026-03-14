@@ -5,9 +5,9 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(SortingGroup))]
 public class Shield : MonoBehaviour, IDoubleRuneAction
 {
-    [SerializeField] private float radius = 1f;
-    [SerializeField] private int segments = 64;
-    [SerializeField] private float lineWidth = 0.05f;
+    [SerializeField] private float radius = 0.0001f;
+    [SerializeField] private int segments = 3;
+    [SerializeField] private float lineWidth = 0.001f;
     [SerializeField] private Color shieldColor = new Color(0.3f, 0.6f, 1f, 0.35f);
 
     private LineRenderer shieldRenderer;
@@ -50,20 +50,18 @@ public class Shield : MonoBehaviour, IDoubleRuneAction
         StartCoroutine(TrackShield());
     }
 
-    public void TriggerUp()
-    {
-        StopAllCoroutines();
-        if (shieldRenderer != null)
-            shieldRenderer.enabled = false;
-    }
+    public void TriggerUp() { }
 
     private IEnumerator TrackShield()
     {
-        while (true)
+        float elapsed = 0f;
+        while (elapsed < 3f)
         {
             UpdateCircle(player.transform.position);
+            elapsed += Time.deltaTime;
             yield return null;
         }
+        shieldRenderer.enabled = false;
     }
 
     private void UpdateCircle(Vector3 center)
