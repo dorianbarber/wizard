@@ -7,6 +7,7 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
     [SerializeField] private float length = 10f;
     [SerializeField] private float duration = 0.5f;
     [SerializeField] private float originOffset = 0.5f;
+    [SerializeField] private Material guidingLineMaterial;
 
     private LineRenderer laserRenderer;
     private LineRenderer guidingLineRenderer;
@@ -22,8 +23,14 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
     {
         if (laserRenderer != null) return;
 
-        laserRenderer = CreateLineRenderer("LaserRenderer", 0.05f, new Color(1f, 0f, 0f, 0.9f));
-        guidingLineRenderer = CreateLineRenderer("GuidingLineRenderer", 0.05f, new Color(1f, 0f, 0f, 0.2f));
+        laserRenderer = CreateLineRenderer("LaserRenderer", 0.05f, new Color(1f, 0.047f, 0f, 1f));
+        var laserGlowMaterial = new Material(Shader.Find("Shader Graphs/laserGlowShader"));
+        laserGlowMaterial.SetColor("_GlowColor", new Color(191f / 255f * 3.28f, 0f, 0f, 186f / 255f));
+        laserRenderer.material = laserGlowMaterial;
+
+        guidingLineRenderer = CreateLineRenderer("GuidingLineRenderer", 0.05f, new Color(1f, 0f, 0f, 0.6f));
+        if (guidingLineMaterial != null)
+            guidingLineRenderer.material = guidingLineMaterial;
     }
 
     private LineRenderer CreateLineRenderer(string goName, float width, Color color)

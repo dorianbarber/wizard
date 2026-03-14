@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2539488487078088497}
   - component: {fileID: 1117751294831687342}
+  - component: {fileID: 5528228931745976065}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -47,3 +48,17 @@ MonoBehaviour:
   length: 10
   duration: 0.5
   originOffset: 0.5
+  guidingLineMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!210 &5528228931745976065
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5340376400093979029}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
