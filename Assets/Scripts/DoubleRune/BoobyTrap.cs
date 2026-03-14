@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class BoobyTrap : MonoBehaviour, IDoubleRuneAction
 {
-    public void Execute()
+    public void TriggerDown()
     {
-        Debug.Log("BoobyTrap triggered!");
+        Debug.Log("BoobyTrap TriggerDown!");
+    }
+
+    public void TriggerUp()
+    {
+        Debug.Log("BoobyTrap TriggerUp!");
     }
 }

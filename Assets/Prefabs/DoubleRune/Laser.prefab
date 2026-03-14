@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231802235fae7204cb1e79ed906483e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserAttack
+  length: 10
+  duration: 0.5
+  originOffset: 0.5

@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class SlowField : MonoBehaviour, IDoubleRuneAction
 {
-    public void Execute()
+    public void TriggerDown()
     {
-        Debug.Log("SlowField triggered!");
+        Debug.Log("SlowField TriggerDown!");
+    }
+
+    public void TriggerUp()
+    {
+        Debug.Log("SlowField TriggerUp!");
     }
 }
