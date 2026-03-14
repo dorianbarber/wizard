@@ -49,7 +49,7 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
     {
         EnsureInitialized();
         this.player = player;
-        player.SetMovementEnabled(false);
+        player.SetAimingMode(true, 0.1f);
         StartCoroutine(ShowGuidingLaser());
     }
 
@@ -59,8 +59,8 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
 
         StopAllCoroutines();
         guidingLineRenderer.enabled = false;
-        player.SetMovementEnabled(true);
-        StartCoroutine(FireLaser(player.FacingDirection));
+        player.SetAimingMode(false);
+        StartCoroutine(FireLaser(player.AimDirection));
     }
 
     private IEnumerator ShowGuidingLaser()
@@ -68,7 +68,7 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
         guidingLineRenderer.enabled = true;
         while (true)
         {
-            UpdateLine(guidingLineRenderer, player.FacingDirection);
+            UpdateLine(guidingLineRenderer, player.AimDirection);
             yield return null;
         }
     }

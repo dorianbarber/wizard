@@ -60,10 +60,7 @@ public class DoubleRuneActionController : MonoBehaviour
     public void TriggerDown()
     {
         if (!pickupController.TryPeekPair(out RuneType first, out RuneType second))
-        {
-            Debug.LogError("[DoubleRuneActionController] Not enough runes in queue to determine action.");
             return;
-        }
 
         ActionType actionType = RuneToAction.GetAction(first, second);
         if (!actions.TryGetValue(actionType, out currentAction)) return;

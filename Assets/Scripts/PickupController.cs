@@ -13,6 +13,8 @@ public class PickupController : MonoBehaviour
         uiRuneController.AddRune(runeType);
     }
 
+    public bool HasOne() => runeQueue.Count >= 1;
+
     public bool TryExpendOne(out RuneType rune)
     {
         if (runeQueue.Count < 1)
