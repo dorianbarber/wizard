@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
             var rightStick = gamepad.rightStick.ReadValue();
             if (rightStick.sqrMagnitude > 0.01f)
                 FacingDirection = rightStick.normalized;
+            animator.SetBool("isWalking", false);
         }
     }
 
