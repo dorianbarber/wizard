@@ -44,14 +44,17 @@ TagManager:
   - name: ground
     uniqueID: 3037100723
     locked: 0
-  - name: New Layer 3
-    uniqueID: 3476590439
-    locked: 0
   - name: runes
     uniqueID: 279180367
     locked: 0
   - name: player
     uniqueID: 1293034187
+    locked: 0
+  - name: cover
+    uniqueID: 3476590439
+    locked: 0
+  - name: attack
+    uniqueID: 2346989159
     locked: 0
   m_RenderingLayers:
   - Default
