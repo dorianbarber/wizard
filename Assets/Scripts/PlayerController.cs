@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 moveInput;
-
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,7 +26,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("MoveX", 0);
             animator.SetFloat("MoveY", 0);
         }
-}
+    }
 
     void FixedUpdate()
     {
