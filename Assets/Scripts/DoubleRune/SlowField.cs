@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class SlowCircleAttack : MonoBehaviour, IDoubleRuneAction
+public class SlowField : MonoBehaviour, IDoubleRuneAction
 {
     public void Execute()
     {
-        Debug.Log("SlowCircleAttack triggered!");
+        Debug.Log("SlowField triggered!");
     }
 }

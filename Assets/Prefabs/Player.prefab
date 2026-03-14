@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5493935022274385156}
   - component: {fileID: 2977313050144386899}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,8 +105,10 @@ GameObject:
   - component: {fileID: 2116456841554465800}
   - component: {fileID: 7343555917138568934}
   - component: {fileID: 83982262740022677}
-  - component: {fileID: 7354603914730587058}
-  m_Layer: 0
+  - component: {fileID: 8653726289660032715}
+  - component: {fileID: 1971275097358491634}
+  - component: {fileID: 1215205564326253273}
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +282,66 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &7354603914730587058
+--- !u!114 &8653726289660032715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7709700411546664291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ac2aa6a1076b54ba709eca943e6edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  uiRuneController: {fileID: 0}
+--- !u!61 &1971275097358491634
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7709700411546664291}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.27, y: 0.34}
+    newSize: {x: 0.27, y: 0.34}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.27, y: 0.34}
+  m_EdgeRadius: 0
+--- !u!114 &1215205564326253273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,4 +356,4 @@ MonoBehaviour:
   boobyTrapPrefab: {fileID: 5738773923668391160, guid: 0a2f688461c53dc498a73f28a3c11c46, type: 3}
   laserAttackPrefab: {fileID: 5340376400093979029, guid: 256493d56ee18c940a2a3465329fe871, type: 3}
   shieldPrefab: {fileID: 3097849183801727455, guid: 2f5669964ea8a17468c915beb2c7bd6e, type: 3}
-  slowCircleAttackPrefab: {fileID: 3872258036158094865, guid: 63da76cc3d3b65a4184c0587395961ab, type: 3}
+  slowFieldPrefab: {fileID: 3872258036158094865, guid: 63da76cc3d3b65a4184c0587395961ab, type: 3}

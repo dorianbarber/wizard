@@ -11,7 +11,7 @@ public class DoubleRuneActionController : MonoBehaviour
     [SerializeField] private GameObject boobyTrapPrefab;
     [SerializeField] private GameObject laserAttackPrefab;
     [SerializeField] private GameObject shieldPrefab;
-    [SerializeField] private GameObject slowCircleAttackPrefab;
+    [SerializeField] private GameObject slowFieldPrefab;
 
     private IDoubleRuneAction[] actions;
 
@@ -22,7 +22,7 @@ public class DoubleRuneActionController : MonoBehaviour
             Instantiate(boobyTrapPrefab).GetComponent<BoobyTrap>(),
             Instantiate(laserAttackPrefab).GetComponent<LaserAttack>(),
             Instantiate(shieldPrefab).GetComponent<Shield>(),
-            Instantiate(slowCircleAttackPrefab).GetComponent<SlowCircleAttack>()
+            Instantiate(slowFieldPrefab).GetComponent<SlowField>()
         };
     }
 

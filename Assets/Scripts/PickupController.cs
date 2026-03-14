@@ -1,16 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PickupController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public UI_RuneController uiRuneController;
+
+    private readonly Queue<RuneType> runeQueue = new();
+
+    public void CollectRune(RuneType runeType)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        runeQueue.Enqueue(runeType);
+        uiRuneController.AddRune(runeType);
     }
 }
