@@ -51,7 +51,10 @@ TagManager:
     uniqueID: 1293034187
     locked: 0
   - name: cover
-    uniqueID: 2999476449
+    uniqueID: 3476590439
+    locked: 0
+  - name: attack
+    uniqueID: 2346989159
     locked: 0
   m_RenderingLayers:
   - Default
