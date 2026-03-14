@@ -5,8 +5,18 @@ public class RuneController : MonoBehaviour
     [SerializeField] private CircleCollider2D circleCollider;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    public void Init(RuneType runeType)
+    private RuneType runeType;
+
+    public void Awake()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        RuneType[] values = (RuneType[])System.Enum.GetValues(typeof(RuneType));
+        runeType = values[Random.Range(0, values.Length)];
+
         spriteRenderer.color = runeType switch
         {
             RuneType.Red => Color.red,
@@ -20,8 +30,8 @@ public class RuneController : MonoBehaviour
     {
         if (other.gameObject.layer != 10) return;
 
-
-        Debug.Log("Yar");
-        // TODO: handle player collecting rune
+        PickupController pickupController = other.GetComponent<PickupController>();
+        pickupController.CollectRune(runeType);
+        Destroy(gameObject);
     }
 }
