@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 public interface IDoubleRuneAction
 {
-    void Execute();
+    void TriggerDown();
+    void TriggerUp();
 }
 
 public class DoubleRuneActionController : MonoBehaviour
@@ -14,6 +15,7 @@ public class DoubleRuneActionController : MonoBehaviour
     [SerializeField] private GameObject slowFieldPrefab;
 
     private IDoubleRuneAction[] actions;
+    private IDoubleRuneAction currentAction;
 
     void Awake()
     {
@@ -43,13 +45,23 @@ public class DoubleRuneActionController : MonoBehaviour
     void Update()
     {
         var gamepad = Gamepad.current;
-        if (gamepad != null && gamepad.rightTrigger.wasPressedThisFrame)
-            TriggerRandomAction();
+        if (gamepad == null) return;
+
+        if (gamepad.rightTrigger.wasPressedThisFrame)
+            TriggerDown();
+        else if (gamepad.rightTrigger.wasReleasedThisFrame)
+            TriggerUp();
     }
 
-    public void TriggerRandomAction()
+    public void TriggerDown()
     {
         int index = Random.Range(0, actions.Length);
-        actions[index].Execute();
+        currentAction = actions[index];
+        currentAction.TriggerDown();
+    }
+
+    public void TriggerUp()
+    {
+        currentAction?.TriggerUp();
     }
 }

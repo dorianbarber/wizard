@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour, IDoubleRuneAction
 {
-    public void Execute()
+    public void TriggerDown()
     {
-        Debug.Log("Shield triggered!");
+        Debug.Log("Shield TriggerDown!");
+    }
+
+    public void TriggerUp()
+    {
+        Debug.Log("Shield TriggerUp!");
     }
 }
