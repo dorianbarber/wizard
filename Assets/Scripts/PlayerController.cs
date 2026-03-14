@@ -31,11 +31,13 @@ public class PlayerController : MonoBehaviour
             FacingDirection = moveInput.normalized;
             animator.SetFloat("MoveX", moveInput.x);
             animator.SetFloat("MoveY", moveInput.y);
+            animator.SetBool("isWalking", true);
         }
         else
         {
-            animator.SetFloat("MoveX", 0);
-            animator.SetFloat("MoveY", 0);
+            animator.SetBool("isWalking", false);
+            // animator.SetFloat("MoveX", 0);
+            // animator.SetFloat("MoveY", 0);
         }
     }
 
