@@ -67,7 +67,7 @@ public class RuneController : MonoBehaviour
     public void Init()
     {
         RuneType[] values = (RuneType[])System.Enum.GetValues(typeof(RuneType));
-        runeType = values[Random.Range(0, values.Length)];
+        runeType = RuneType.Red;
 
         spriteRenderer.color = runeType switch
         {

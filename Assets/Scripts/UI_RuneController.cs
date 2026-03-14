@@ -14,7 +14,20 @@ public class UI_RuneController : MonoBehaviour
     public void RemoveRune()
     {
         if (transform.childCount == 0) return;
-        Destroy(transform.GetChild(0).gameObject);
+        Transform child = transform.GetChild(0);
+        child.SetParent(null);
+        Destroy(child.gameObject);
+        RefreshLabels();
+    }
+
+    public void RemovePair()
+    {
+        for (int i = 0; i < 2 && transform.childCount > 0; i++)
+        {
+            Transform child = transform.GetChild(0);
+            child.SetParent(null);
+            Destroy(child.gameObject);
+        }
         RefreshLabels();
     }
 

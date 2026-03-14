@@ -131,14 +131,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RuneSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 4874554615325961808, guid: dad5e0bfbebf4324ebf63452f0e6b7bb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874554615325961808, guid: dad5e0bfbebf4324ebf63452f0e6b7bb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 7097653569765554714, guid: dad5e0bfbebf4324ebf63452f0e6b7bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -178,14 +170,6 @@ PrefabInstance:
     - target: {fileID: 7097653569765554714, guid: dad5e0bfbebf4324ebf63452f0e6b7bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7834790221685022523, guid: dad5e0bfbebf4324ebf63452f0e6b7bb, type: 3}
-      propertyPath: spawnBounds.m_Extent.x
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7834790221685022523, guid: dad5e0bfbebf4324ebf63452f0e6b7bb, type: 3}
-      propertyPath: spawnBounds.m_Extent.y
-      value: 6.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -308,14 +292,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 83982262740022677, guid: 79cfc5677fc604c079fe6cdac14e6cee, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 83982262740022677, guid: 79cfc5677fc604c079fe6cdac14e6cee, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1293034187
-      objectReference: {fileID: 0}
     - target: {fileID: 6036277047848092280, guid: 79cfc5677fc604c079fe6cdac14e6cee, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.23
@@ -434,22 +410,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3593484286489285397, guid: 425ca36ea6fcb46f0a31490727894320, type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3593484286489285397, guid: 425ca36ea6fcb46f0a31490727894320, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3593484286489285397, guid: 425ca36ea6fcb46f0a31490727894320, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3593484286489285397, guid: 425ca36ea6fcb46f0a31490727894320, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4242137964766942622, guid: 425ca36ea6fcb46f0a31490727894320, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
