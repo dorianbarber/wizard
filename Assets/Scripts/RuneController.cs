@@ -7,11 +7,6 @@ public class RuneController : MonoBehaviour
 
     private RuneType runeType;
 
-    public void Awake()
-    {
-        Init();
-    }
-
     public void Init()
     {
         RuneType[] values = (RuneType[])System.Enum.GetValues(typeof(RuneType));
