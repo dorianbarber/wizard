@@ -16,6 +16,7 @@ public class DoubleRuneActionController : MonoBehaviour
     [SerializeField] private GameObject laserAttackPrefab;
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private GameObject slowFieldPrefab;
+    [SerializeField] private GameObject magnetPrefab;
 
     private Dictionary<ActionType, IDoubleRuneAction> actions;
     private IDoubleRuneAction currentAction;
@@ -29,6 +30,7 @@ public class DoubleRuneActionController : MonoBehaviour
             { ActionType.Laser,  InstantiateAction<LaserAttack>(laserAttackPrefab) },
             { ActionType.Shield, InstantiateAction<Shield>(shieldPrefab) },
             { ActionType.Slow,   InstantiateAction<SlowField>(slowFieldPrefab) },
+            { ActionType.Magnet, InstantiateAction<MagnetController>(magnetPrefab) },
         };
     }
 
