@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.Rendering;
+[RequireComponent(typeof(SortingGroup))]
 public class LaserAttack : MonoBehaviour, IDoubleRuneAction
 {
     [SerializeField] private float length = 10f;
@@ -8,16 +9,20 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
     [SerializeField] private float originOffset = 0.5f;
 
     private LineRenderer laserRenderer;
-    private LineRenderer laserGlowRenderer;
     private LineRenderer guidingLineRenderer;
     private PlayerController player;
+
+    void Awake()
+    {
+        var sortingGroup = gameObject.GetComponent<SortingGroup>() ?? gameObject.AddComponent<SortingGroup>();
+        sortingGroup.sortingLayerName = "attack";
+    }
 
     private void EnsureInitialized()
     {
         if (laserRenderer != null) return;
 
         laserRenderer = CreateLineRenderer("LaserRenderer", 0.05f, new Color(1f, 0f, 0f, 0.9f));
-        laserGlowRenderer = CreateLineRenderer("LaserGlowRenderer", 0.25f, new Color(1f, 0.2f, 0.2f, 0.15f));
         guidingLineRenderer = CreateLineRenderer("GuidingLineRenderer", 0.05f, new Color(1f, 0f, 0f, 0.2f));
     }
 
@@ -71,12 +76,9 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
     private IEnumerator FireLaser(Vector2 direction)
     {
         UpdateLine(laserRenderer, direction);
-        UpdateLine(laserGlowRenderer, direction);
         laserRenderer.enabled = true;
-        laserGlowRenderer.enabled = true;
         yield return new WaitForSeconds(duration);
         laserRenderer.enabled = false;
-        laserGlowRenderer.enabled = false;
     }
 
     private void UpdateLine(LineRenderer lr, Vector2 direction)
