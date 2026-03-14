@@ -22,36 +22,37 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-    // Unity looks for functions with the prefix "On" to handle events. Move is an action specific attached to the player object. 
-    public void OnMove(InputValue value)
-    {
-        moveInput = value.Get<Vector2>();
-        if (moveInput != Vector2.zero)
-        {
-            FacingDirection = moveInput.normalized;
-            animator.SetFloat("MoveX", moveInput.x);
-            animator.SetFloat("MoveY", moveInput.y);
-            animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-            // animator.SetFloat("MoveX", 0);
-            // animator.SetFloat("MoveY", 0);
-        }
-    }
+    public Gamepad assignedGamepad;
 
     void Update()
     {
-        var gamepad = Gamepad.current;
-        if (gamepad == null) return;
+        if (assignedGamepad == null) return;
 
-        if (gamepad.rightTrigger.isPressed)
+        if (assignedGamepad.rightTrigger.isPressed)
         {
-            var rightStick = gamepad.rightStick.ReadValue();
+            var rightStick = assignedGamepad.rightStick.ReadValue();
             if (rightStick.sqrMagnitude > 0.01f)
                 FacingDirection = rightStick.normalized;
             animator.SetBool("isWalking", false);
+        }
+        else
+        {
+            var leftStick = assignedGamepad.leftStick.ReadValue();
+            if (leftStick != moveInput)
+            {
+                moveInput = leftStick;
+                if (moveInput != Vector2.zero)
+                {
+                    FacingDirection = moveInput.normalized;
+                    animator.SetFloat("MoveX", moveInput.x);
+                    animator.SetFloat("MoveY", moveInput.y);
+                    animator.SetBool("isWalking", true);
+                }
+                else
+                {
+                    animator.SetBool("isWalking", false);
+                }
+            }
         }
     }
 

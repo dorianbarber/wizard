@@ -36,10 +36,10 @@ public class Shield : MonoBehaviour, IDoubleRuneAction
         shieldRenderer.enabled = false;
     }
 
-    public void TriggerDown()
+    public void TriggerDown(PlayerController player)
     {
         EnsureInitialized();
-        player = FindFirstObjectByType<PlayerController>();
+        this.player = player;
         if (player == null)
         {
             Debug.LogError("[Shield] No PlayerController found in scene.");

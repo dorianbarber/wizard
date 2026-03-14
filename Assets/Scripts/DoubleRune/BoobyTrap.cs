@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BoobyTrap : MonoBehaviour, IDoubleRuneAction
 {
-    public void TriggerDown()
+    public void TriggerDown(PlayerController player)
     {
         Debug.Log("BoobyTrap TriggerDown!");
     }

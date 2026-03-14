@@ -1,18 +1,23 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerController))]
 public class SingleRuneActionController : MonoBehaviour
 {
     [SerializeField] private PickupController pickupController;
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
 
     private bool r1WasPressed;
 
+    void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
+
     void Update()
     {
-        var gamepad = Gamepad.current;
+        var gamepad = playerController.assignedGamepad;
         if (gamepad == null) return;
 
         bool r1Pressed = gamepad.rightShoulder.isPressed;
@@ -24,6 +29,7 @@ public class SingleRuneActionController : MonoBehaviour
                 GameObject projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
                 ProjectileController pc = projectile.GetComponent<ProjectileController>();
                 pc.Direction = playerController.FacingDirection;
+                pc.Shooter = playerController.gameObject;
             }
         }
 
