@@ -40,16 +40,10 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
         lr.endColor = color;
     }
 
-    public void TriggerDown()
+    public void TriggerDown(PlayerController player)
     {
         EnsureInitialized();
-        player = FindFirstObjectByType<PlayerController>();
-        if (player == null)
-        {
-            Debug.LogError("[LaserAttack] No PlayerController found in scene.");
-            return;
-        }
-
+        this.player = player;
         player.SetMovementEnabled(false);
         StartCoroutine(ShowGuidingLaser());
     }

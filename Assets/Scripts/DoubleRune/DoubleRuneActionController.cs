@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public interface IDoubleRuneAction
 {
-    void TriggerDown();
+    void TriggerDown(PlayerController player);
     void TriggerUp();
 }
 
+[RequireComponent(typeof(PlayerController))]
 public class DoubleRuneActionController : MonoBehaviour
 {
     [SerializeField] private PickupController pickupController;
+    private PlayerController playerController;
     [SerializeField] private GameObject boobyTrapPrefab;
     [SerializeField] private GameObject laserAttackPrefab;
     [SerializeField] private GameObject shieldPrefab;
@@ -21,6 +22,7 @@ public class DoubleRuneActionController : MonoBehaviour
 
     void Awake()
     {
+        playerController = GetComponent<PlayerController>();
         actions = new Dictionary<ActionType, IDoubleRuneAction>
         {
             { ActionType.Trap,   InstantiateAction<BoobyTrap>(boobyTrapPrefab) },
@@ -46,7 +48,7 @@ public class DoubleRuneActionController : MonoBehaviour
 
     void Update()
     {
-        var gamepad = Gamepad.current;
+        var gamepad = playerController.assignedGamepad;
         if (gamepad == null) return;
 
         if (gamepad.rightTrigger.wasPressedThisFrame)
@@ -65,7 +67,7 @@ public class DoubleRuneActionController : MonoBehaviour
 
         ActionType actionType = RuneToAction.GetAction(first, second);
         if (!actions.TryGetValue(actionType, out currentAction)) return;
-        currentAction.TriggerDown();
+        currentAction.TriggerDown(playerController);
     }
 
     public void TriggerUp()

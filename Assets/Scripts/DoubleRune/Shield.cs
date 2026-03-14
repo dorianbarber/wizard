@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour, IDoubleRuneAction
 {
-    public void TriggerDown()
+    public void TriggerDown(PlayerController player)
     {
         Debug.Log("Shield TriggerDown!");
     }
