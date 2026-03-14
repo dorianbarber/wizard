@@ -54,6 +54,14 @@ public class Shield : MonoBehaviour, IDoubleRuneAction
 
     private IEnumerator TrackShield()
     {
+        var colliderGo = new GameObject("ShieldCollider");
+        colliderGo.transform.SetParent(player.transform);
+        colliderGo.transform.localPosition = Vector3.zero;
+        var col = colliderGo.AddComponent<CircleCollider2D>();
+        col.isTrigger = true;
+        col.radius = radius;
+        colliderGo.AddComponent<ShieldCollider>();
+
         float elapsed = 0f;
         while (elapsed < 3f)
         {
@@ -61,6 +69,8 @@ public class Shield : MonoBehaviour, IDoubleRuneAction
             elapsed += Time.deltaTime;
             yield return null;
         }
+
+        Destroy(colliderGo);
         shieldRenderer.enabled = false;
     }
 
@@ -73,5 +83,14 @@ public class Shield : MonoBehaviour, IDoubleRuneAction
             float y = center.y + radius * Mathf.Sin(angle);
             shieldRenderer.SetPosition(i, new Vector3(x, y, center.z));
         }
+    }
+}
+
+public class ShieldCollider : MonoBehaviour
+{
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<ProjectileController>() != null)
+            Destroy(other.gameObject);
     }
 }
