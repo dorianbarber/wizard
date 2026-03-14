@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,22 +10,23 @@ public interface IDoubleRuneAction
 
 public class DoubleRuneActionController : MonoBehaviour
 {
+    [SerializeField] private PickupController pickupController;
     [SerializeField] private GameObject boobyTrapPrefab;
     [SerializeField] private GameObject laserAttackPrefab;
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private GameObject slowFieldPrefab;
 
-    private IDoubleRuneAction[] actions;
+    private Dictionary<ActionType, IDoubleRuneAction> actions;
     private IDoubleRuneAction currentAction;
 
     void Awake()
     {
-        actions = new IDoubleRuneAction[]
+        actions = new Dictionary<ActionType, IDoubleRuneAction>
         {
-            InstantiateAction<BoobyTrap>(boobyTrapPrefab),
-            InstantiateAction<LaserAttack>(laserAttackPrefab),
-            InstantiateAction<Shield>(shieldPrefab),
-            InstantiateAction<SlowField>(slowFieldPrefab)
+            { ActionType.Trap,   InstantiateAction<BoobyTrap>(boobyTrapPrefab) },
+            { ActionType.Laser,  InstantiateAction<LaserAttack>(laserAttackPrefab) },
+            { ActionType.Shield, InstantiateAction<Shield>(shieldPrefab) },
+            { ActionType.Slow,   InstantiateAction<SlowField>(slowFieldPrefab) },
         };
     }
 
@@ -55,13 +57,22 @@ public class DoubleRuneActionController : MonoBehaviour
 
     public void TriggerDown()
     {
-        int index = 1; //Random.Range(0, actions.Length);
-        currentAction = actions[index];
+        if (!pickupController.TryPeekPair(out RuneType first, out RuneType second))
+        {
+            Debug.LogError("[DoubleRuneActionController] Not enough runes in queue to determine action.");
+            return;
+        }
+
+        ActionType actionType = RuneToAction.GetAction(first, second);
+        if (!actions.TryGetValue(actionType, out currentAction)) return;
         currentAction.TriggerDown();
     }
 
     public void TriggerUp()
     {
-        currentAction?.TriggerUp();
+        if (currentAction == null) return;
+        currentAction.TriggerUp();
+        currentAction = null;
+        pickupController.ExpendPair();
     }
 }
