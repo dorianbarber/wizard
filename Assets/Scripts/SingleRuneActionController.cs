@@ -29,6 +29,7 @@ public class SingleRuneActionController : MonoBehaviour
                 GameObject projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
                 ProjectileController pc = projectile.GetComponent<ProjectileController>();
                 pc.Direction = playerController.FacingDirection;
+                pc.Shooter = playerController.gameObject;
             }
         }
 

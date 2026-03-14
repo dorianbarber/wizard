@@ -77,6 +77,18 @@ public class LaserAttack : MonoBehaviour, IDoubleRuneAction
     {
         UpdateLine(laserRenderer, direction);
         laserRenderer.enabled = true;
+
+        Vector2 origin = player.transform.position + (Vector3)(direction * originOffset);
+        Vector2 end = origin + direction * length;
+        int playerLayer = LayerMask.GetMask("Player");
+        RaycastHit2D[] hits = Physics2D.LinecastAll(origin, end, playerLayer);
+        foreach (var hit in hits)
+        {
+            if (hit.collider.gameObject == player.gameObject) continue;
+            var health = hit.collider.GetComponent<PlayerHealth>();
+            if (health != null) health.Hit();
+        }
+
         yield return new WaitForSeconds(duration);
         laserRenderer.enabled = false;
     }
