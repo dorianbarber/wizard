@@ -7,19 +7,18 @@ public class SingleRuneActionController : MonoBehaviour
     private PlayerController playerController;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float aimLineLength = 5f;
+    [SerializeField] private float idleLineLength = 0.4f;
+    [SerializeField] private float aimedLineLength = 3f;
+
+    private static readonly Color IdleColor = new(1f, 1f, 0f, 0.25f);
+    private static readonly Color AimedColor = new(1f, 1f, 0f, 0.9f);
 
     private LineRenderer guidingLineRenderer;
-    private bool isAiming = false;
+    private bool isCharged = false;
 
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
-    }
-
-    private void EnsureInitialized()
-    {
-        if (guidingLineRenderer != null) return;
 
         var go = new GameObject("SingleRuneGuidingLine");
         go.transform.SetParent(transform);
@@ -27,9 +26,8 @@ public class SingleRuneActionController : MonoBehaviour
         guidingLineRenderer.positionCount = 2;
         guidingLineRenderer.startWidth = 0.05f;
         guidingLineRenderer.endWidth = 0.05f;
-        guidingLineRenderer.startColor = new Color(1f, 1f, 0f, 0.4f);
-        guidingLineRenderer.endColor = new Color(1f, 1f, 0f, 0.4f);
-        guidingLineRenderer.enabled = false;
+        guidingLineRenderer.startColor = IdleColor;
+        guidingLineRenderer.endColor = IdleColor;
     }
 
     void Update()
@@ -37,51 +35,42 @@ public class SingleRuneActionController : MonoBehaviour
         var gamepad = playerController.assignedGamepad;
         if (gamepad == null) return;
 
-        if (gamepad.rightShoulder.wasPressedThisFrame)
+        if (gamepad.rightShoulder.wasPressedThisFrame && pickupController.HasOne())
         {
-            if (pickupController.HasOne())
-            {
-                EnsureInitialized();
-                isAiming = true;
-                playerController.SetAimingMode(true, 0.5f);
-            }
+            isCharged = true;
+            guidingLineRenderer.startColor = AimedColor;
+            guidingLineRenderer.endColor = AimedColor;
         }
 
-        if (isAiming)
+        if (isCharged && gamepad.rightShoulder.wasReleasedThisFrame)
         {
-            if (gamepad.rightStick.ReadValue().sqrMagnitude > 0.01f)
-            {
-                guidingLineRenderer.enabled = true;
-                UpdateGuidingLine();
-            }
-
-            if (gamepad.rightShoulder.wasReleasedThisFrame)
-                FireAndReset();
+            Fire();
+            isCharged = false;
+            guidingLineRenderer.startColor = IdleColor;
+            guidingLineRenderer.endColor = IdleColor;
         }
+
+        UpdateGuidingLine();
     }
 
     private void UpdateGuidingLine()
     {
         Vector2 dir = playerController.AimDirection;
+        float length = isCharged ? aimedLineLength : idleLineLength;
         Vector3 origin = playerController.transform.position + (Vector3)(dir * 0.5f);
-        Vector3 end = origin + (Vector3)(dir * aimLineLength);
+        Vector3 end = origin + (Vector3)(dir * length);
         guidingLineRenderer.SetPosition(0, origin);
         guidingLineRenderer.SetPosition(1, end);
     }
 
-    private void FireAndReset()
+    private void Fire()
     {
-        isAiming = false;
-        guidingLineRenderer.enabled = false;
-        playerController.SetAimingMode(false);
+        if (!pickupController.TryExpendOne(out _)) return;
 
-        if (pickupController.TryExpendOne(out _))
-        {
-            Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
-            GameObject projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
-            ProjectileController pc = projectile.GetComponent<ProjectileController>();
-            pc.Direction = playerController.AimDirection;
-            pc.Shooter = playerController.gameObject;
-        }
+        Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
+        GameObject projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
+        ProjectileController pc = projectile.GetComponent<ProjectileController>();
+        pc.Direction = playerController.AimDirection;
+        pc.Shooter = playerController.gameObject;
     }
 }
