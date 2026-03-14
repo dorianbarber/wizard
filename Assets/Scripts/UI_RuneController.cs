@@ -18,6 +18,13 @@ public class UI_RuneController : MonoBehaviour
         RefreshLabels();
     }
 
+    public void RemovePair()
+    {
+        if (transform.childCount >= 1) Destroy(transform.GetChild(0).gameObject);
+        if (transform.childCount >= 2) Destroy(transform.GetChild(1).gameObject);
+        RefreshLabels();
+    }
+
     private void RefreshLabels()
     {
         int count = transform.childCount;

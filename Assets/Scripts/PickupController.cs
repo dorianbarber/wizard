@@ -12,4 +12,38 @@ public class PickupController : MonoBehaviour
         runeQueue.Enqueue(runeType);
         uiRuneController.AddRune(runeType);
     }
+
+    public bool TryExpendOne(out RuneType rune)
+    {
+        if (runeQueue.Count < 1)
+        {
+            rune = default;
+            return false;
+        }
+        rune = runeQueue.Dequeue();
+        uiRuneController.RemoveRune();
+        return true;
+    }
+
+    public void ExpendPair()
+    {
+        if (runeQueue.Count >= 1) runeQueue.Dequeue();
+        if (runeQueue.Count >= 1) runeQueue.Dequeue();
+        uiRuneController.RemovePair();
+    }
+
+    public bool TryPeekPair(out RuneType first, out RuneType second)
+    {
+        if (runeQueue.Count < 2)
+        {
+            first = default;
+            second = default;
+            return false;
+        }
+
+        RuneType[] arr = runeQueue.ToArray();
+        first = arr[0];
+        second = arr[1];
+        return true;
+    }
 }
